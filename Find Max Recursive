@@ -1,0 +1,5 @@
+int findMax(int[] a, int size){
+    if(size == 1)
+        return a[0];
+    return(a[size - 1] > findMax(a, size - 1)) ? a[size - 1] : findMax(a, size - 1);
+}
