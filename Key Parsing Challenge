@@ -1,0 +1,18 @@
+String solution(String S, int K) {
+    String newString = S.replaceAll("-", "");
+    newString = newString.toUpperCase();
+    String transformString = "";
+    int length = newString.length();
+    int startingIndex = (length % K);
+    if(startingIndex != 0 && length > K)
+        transformString = newString.substring(0, startingIndex) + "-";
+    else if(startingIndex != 0 && length <= K)
+        transformString = newString.substring(0, startingIndex);
+    for(int i = startingIndex, j = i + K; j <= length; i += K, j += K){
+        if(j != length)
+            transformString += newString.substring(i, j) + "-";
+        else
+            transformString += newString.substring(i, j);
+    }     
+    return transformString;
+}
