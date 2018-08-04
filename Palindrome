@@ -1,0 +1,9 @@
+boolean isPalindrome(String word){
+    int length = word.length();
+    char[] letters = word.toCharArray();
+    for(int i = 0, j = length - 1; i <= j; i++, j--){
+        if(letters[i] != letters[j])
+            return false;
+    }
+    return true;
+}
