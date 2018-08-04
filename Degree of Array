@@ -1,0 +1,48 @@
+    HashMap degree(int[] a){
+        int size = a.length;
+        int counter = 0;
+        HashMap<Integer, Integer> hmap = new HashMap<>();
+        for(int i = 0; i < size; i++){
+            if(!hmap.containsKey(a[i]))
+                hmap.put(a[i], 1);
+            else{
+                hmap.put(a[i], hmap.get(a[i]) + 1);
+            }
+        }
+        /*int max = 0;
+        for (HashMap.Entry pair : hmap.entrySet()) {
+            if((int)pair.getValue() > max)
+                max = (int)pair.getValue();
+        }*/
+        return hmap; 
+    }
+    int degreeSubArray(int[] a){
+        HashMap<Integer,Integer> map = degree(a);
+        //int[] subArray;
+        int max = 0;
+        for (HashMap.Entry pair : map.entrySet()) {
+            if((int)pair.getValue() > max)
+                max = (int)pair.getValue();
+        }
+        int start = -1, end = -1;
+        HashMap<Integer,Integer> map2 = new HashMap<>();
+        for(int i = 0; i < a.length; i++){
+            if(map.get(a[i]) == max){
+                start = i;
+                for(int j = i; j < a.length; j++){
+                    if(map.get(a[j]) == max)
+                        end = j;
+                }
+                map2.putIfAbsent(start, end);
+            }
+        }
+        int maxLength = 0;
+        HashMap.Entry maxPair = null;
+        for (HashMap.Entry pair : map2.entrySet()) {
+            if((int)pair.getValue() - (int)pair.getKey() > maxLength)
+                maxPair = pair;
+        }
+        int[] subArray = new int[(int)maxPair.getValue() - (int)maxPair.getKey()];
+        max = subArray.length;
+        return max;
+    }
